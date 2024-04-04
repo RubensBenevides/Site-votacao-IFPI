@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>VOTAÇÃO GREVE CAMPUS IFPI CORRENTE</title>
+    <script>
+        function registrarVoto() {
+            const nome = document.getElementById('nome').value;
+            const voto = document.querySelector('input[name="voto"]:checked').value;
+            
+            // Verifica se o nome foi inserido
+            if(nome === "") {
+                alert("Por favor, insira seu nome.");
+                return false; // Interrompe a função caso o nome não tenha sido inserido
+            }
+            
+            const listaVotos = document.getElementById('listaVotos');
+            const linha = document.createElement('li');
+            linha.textContent = `${nome} votou: ${voto}`;
+            listaVotos.appendChild(linha);
+            
+            // Limpa o campo de nome e desmarca a opção selecionada
+            document.getElementById('nome').value = '';
+            document.querySelector('input[name="voto"]:checked').checked = false;
+            
+            // Previne o formulário de ser enviado (comportamento padrão)
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <h1>VOTAÇÃO GREVE CAMPUS IFPI CORRENTE</h1>
+    <form onsubmit="return registrarVoto()">
+        <div>
+            <label for="nome">INSIRA SEU NOME AQUI:</label>
+            <br>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <br>
+        <input type="radio" id="sim" name="voto" value="SIM" required><label for="sim">SIM</label>
+        <input type="radio" id="nao" name="voto" value="NÃO" required><label for="nao">NÃO</label>
+        <input type="radio" id="abstencao" name="voto" value="ABSTENÇÃO" required><label for="abstencao">ABSTENÇÃO</label>
+        <br><br>
+        <button type="submit">Registrar Voto</button>
+    </form>
+    <h2>Lista de Votos Registrados</h2>
+    <ul id="listaVotos">
+        <!-- Os nomes serão adicionados aqui via JavaScript -->
+    </ul>
+</body>
+</html>
